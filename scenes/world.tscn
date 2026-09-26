@@ -25,7 +25,7 @@ position = Vector2(-311.875, 18.5)
 shape = SubResource("RectangleShape2D_kg1af")
 
 [node name="RigidBody2D2" parent="." instance=ExtResource("4_gnead")]
-position = Vector2(282, -16)
+position = Vector2(-35, -16)
 
 [node name="kill_area" type="Area2D" parent="."]
 position = Vector2(9, 633)

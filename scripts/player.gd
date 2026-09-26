@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 @export var SPEED:= 200.0
 @export var JUMP_VELOCITY:= -320.0
+@onready var animated_sprite_2d = $AnimatedSprite2D
 
-@onready var sprite_2d = $Sprite2D
+func  _ready():
+	animated_sprite_2d.play("idle")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -18,9 +20,11 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
 	if direction == -1:
-		sprite_2d.flip_h = true
+		animated_sprite_2d.flip_h = true
+		animated_sprite_2d.play("running")
 	if direction == 1:
-		sprite_2d.flip_h = false
+		animated_sprite_2d.play("running")
+		animated_sprite_2d.flip_h = false
 	if direction:
 		velocity.x = direction * SPEED
 	else:
