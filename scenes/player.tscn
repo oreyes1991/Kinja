@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3lf4aqd3wc8d"]
+[gd_scene load_steps=5 format=3 uid="uid://d3lf4aqd3wc8d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_xr5kf"]
 [ext_resource type="Texture2D" uid="uid://fmpow7sudxmg" path="res://assets/gato_ropa1.png" id="2_blwln"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pxn0m"]
 radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i211l"]
+size = Vector2(20, 3.5)
 
 [node name="RigidBody2D" type="CharacterBody2D"]
 script = ExtResource("1_xr5kf")
@@ -16,3 +19,11 @@ texture = ExtResource("2_blwln")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_pxn0m")
+
+[node name="foot_collider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="foot_collider"]
+position = Vector2(1, 14.75)
+shape = SubResource("RectangleShape2D_i211l")
+
+[connection signal="area_entered" from="foot_collider" to="." method="_on_foot_collider_area_entered"]
