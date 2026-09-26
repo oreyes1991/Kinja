@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bh6yuxau7bjt1"]
+[gd_scene load_steps=19 format=3 uid="uid://bh6yuxau7bjt1"]
 
 [ext_resource type="Script" path="res://scripts/rat_enemy.gd" id="1_m00sq"]
 [ext_resource type="Texture2D" uid="uid://23h1cxxywcw8" path="res://assets/animated_rat.png" id="2_by6mr"]
+[ext_resource type="AudioStream" uid="uid://2nnxf60vg10y" path="res://sounds/kill_rat3.wav" id="3_uhnq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8nqsm"]
 atlas = ExtResource("2_by6mr")
@@ -92,7 +93,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uloym"]
@@ -102,7 +103,7 @@ height = 55.9987
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45efl"]
 size = Vector2(40, 5.5)
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="bad_rat" type="CharacterBody2D"]
 script = ExtResource("1_m00sq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -110,10 +111,13 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8d1b6")
 animation = &"walk"
+frame = 7
+frame_progress = 0.732557
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 7)
 rotation = 1.57769
+scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_uloym")
 
 [node name="kill_collider" type="Area2D" parent="."]
@@ -121,5 +125,13 @@ shape = SubResource("CapsuleShape2D_uloym")
 [node name="kill_collider" type="CollisionShape2D" parent="kill_collider"]
 position = Vector2(-3, -8.75)
 shape = SubResource("RectangleShape2D_45efl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_uhnq6")
+volume_db = -3.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-2, 0)
+target_position = Vector2(-49, 20)
 
 [connection signal="area_entered" from="kill_collider" to="." method="_on_area_2d_area_entered"]
