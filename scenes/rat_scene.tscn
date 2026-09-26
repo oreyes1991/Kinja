@@ -117,7 +117,6 @@ frame_progress = 0.732557
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 7)
 rotation = 1.57769
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_uloym")
 
 [node name="kill_collider" type="Area2D" parent="."]
@@ -132,6 +131,6 @@ volume_db = -3.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-2, 0)
-target_position = Vector2(-49, 20)
+target_position = Vector2(-37, 20)
 
 [connection signal="area_entered" from="kill_collider" to="." method="_on_area_2d_area_entered"]

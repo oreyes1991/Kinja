@@ -6,11 +6,11 @@
 [node name="Main" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_nqpec")]
-position = Vector2(-2, -31)
+position = Vector2(96, -30)
 scale = Vector2(2, 2)
 
 [node name="World" parent="." instance=ExtResource("2_5mp6p")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(148, -7)
+position = Vector2(292, -19)
 zoom = Vector2(3, 3)
