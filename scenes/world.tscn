@@ -1,9 +1,107 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3pl4vkhkv3y0"]
+[gd_scene load_steps=20 format=3 uid="uid://d3pl4vkhkv3y0"]
 
 [ext_resource type="Texture2D" uid="uid://dream7bmpwusa" path="res://assets/tile.png" id="1_ou80h"]
+[ext_resource type="Texture2D" uid="uid://b6ixoiuuwetcm" path="res://assets/buildings.png" id="2_ubwhs"]
+[ext_resource type="Script" path="res://scenes/animated_sprite_2d.gd" id="3_d8t43"]
+[ext_resource type="PackedScene" uid="uid://bh6yuxau7bjt1" path="res://scenes/rat_scene.tscn" id="4_gnead"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kg1af"]
-size = Vector2(64, 14)
+size = Vector2(291, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sucw8"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvb7g"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glshh"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m77l5"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25ace"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggoqn"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf0hg"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0lfk"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm3bk"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwy6f"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee5f8"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpsfk"]
+atlas = ExtResource("2_ubwhs")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8nla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sucw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvb7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glshh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m77l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25ace")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggoqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf0hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0lfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm3bk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwy6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee5f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpsfk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwdpu"]
+size = Vector2(103.5, 93.25)
 
 [node name="World" type="Node2D"]
 
@@ -11,8 +109,35 @@ size = Vector2(64, 14)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture_filter = 1
+position = Vector2(-136, -3)
+scale = Vector2(4.5625, 2.21875)
 texture = ExtResource("1_ou80h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 9)
+position = Vector2(-134.5, 18.5)
 shape = SubResource("RectangleShape2D_kg1af")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(85, -2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D2"]
+texture_filter = 1
+position = Vector2(87.7499, -5.00001)
+scale = Vector2(4.16406, 2.96875)
+sprite_frames = SubResource("SpriteFrames_s8nla")
+animation = &"idle"
+script = ExtResource("3_d8t43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(173, 45)
+shape = SubResource("RectangleShape2D_xwdpu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(7.75, 43)
+shape = SubResource("RectangleShape2D_xwdpu")
+
+[node name="RigidBody2D" parent="." instance=ExtResource("4_gnead")]
+position = Vector2(94, -14)
+
+[node name="RigidBody2D2" parent="." instance=ExtResource("4_gnead")]
+position = Vector2(262, -20)

@@ -27,3 +27,9 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+
+func _on_foot_collider_area_entered(area):
+	if area.name == "kill_collider":
+		velocity.y = JUMP_VELOCITY / 2
