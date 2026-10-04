@@ -35,3 +35,8 @@ func _on_area_2d_area_entered(area):
 		await audio_stream_player_2d.finished
 		print("me electrocutaste pedrito!!!")
 		queue_free()
+
+
+func _on_damage_collider_area_entered(area):
+	if area.name == 'player_area':
+		direction = direction * -1

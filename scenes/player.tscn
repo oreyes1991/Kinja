@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3lf4aqd3wc8d"]
+[gd_scene load_steps=26 format=3 uid="uid://d3lf4aqd3wc8d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_xr5kf"]
 [ext_resource type="Texture2D" uid="uid://bpaxqdyoypk1l" path="res://assets/cat-running-Sheet.png" id="2_5s1u5"]
@@ -144,29 +144,46 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pxn0m"]
-radius = 7.0
+radius = 4.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i211l"]
-size = Vector2(20, 3.5)
+size = Vector2(6, 1.75)
 
-[node name="RigidBody2D" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_56dx2"]
+radius = 4.0
+height = 14.0
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xr5kf")
 JUMP_VELOCITY = -420.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-5, 0)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_2rc7k")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(-2, 0)
 shape = SubResource("CapsuleShape2D_pxn0m")
 
 [node name="foot_collider" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="foot_collider"]
-position = Vector2(1, 14.75)
+position = Vector2(-2, 7.125)
 shape = SubResource("RectangleShape2D_i211l")
 
+[node name="player_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_area"]
+position = Vector2(-2, -1)
+shape = SubResource("CapsuleShape2D_56dx2")
+debug_color = Color(0.805397, 0.195733, 0.893573, 0.42)
+
+[node name="damage_timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="foot_collider" to="." method="_on_foot_collider_area_entered"]
+[connection signal="area_entered" from="player_area" to="." method="_on_player_area_area_entered"]
+[connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]

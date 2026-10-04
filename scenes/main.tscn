@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctfjnqxd81w24"]
+[gd_scene load_steps=5 format=3 uid="uid://ctfjnqxd81w24"]
 
 [ext_resource type="PackedScene" uid="uid://d3lf4aqd3wc8d" path="res://scenes/player.tscn" id="1_nqpec"]
 [ext_resource type="PackedScene" uid="uid://d3pl4vkhkv3y0" path="res://scenes/world.tscn" id="2_5mp6p"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="3_qijx4"]
+[ext_resource type="PackedScene" uid="uid://cu04f1ftfuc58" path="res://scenes/health_ui.tscn" id="4_x18l4"]
 
 [node name="Main" type="Node2D"]
 
@@ -10,7 +12,20 @@ position = Vector2(96, -30)
 scale = Vector2(2, 2)
 
 [node name="World" parent="." instance=ExtResource("2_5mp6p")]
+position = Vector2(14, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(96, -28)
 zoom = Vector2(3, 3)
+script = ExtResource("3_qijx4")
+player = NodePath("../player")
+weight = 0.05
+
+[node name="health" parent="Camera2D" instance=ExtResource("4_x18l4")]
+offset_left = -321.0
+offset_top = -181.0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[connection signal="health_changed" from="player" to="Camera2D/health" method="_on_player_health_changed"]
+[connection signal="player_death" from="player" to="Camera2D/health" method="_on_player_death"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bh6yuxau7bjt1"]
+[gd_scene load_steps=20 format=3 uid="uid://bh6yuxau7bjt1"]
 
 [ext_resource type="Script" path="res://scripts/rat_enemy.gd" id="1_m00sq"]
 [ext_resource type="Texture2D" uid="uid://23h1cxxywcw8" path="res://assets/animated_rat.png" id="2_by6mr"]
@@ -97,32 +97,35 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uloym"]
-radius = 11.9997
-height = 55.9987
+radius = 5.99986
+height = 29.9993
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45efl"]
-size = Vector2(40, 5.5)
+size = Vector2(25, 3.75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m0bdi"]
+radius = 3.9998
+height = 31.9984
 
 [node name="bad_rat" type="CharacterBody2D"]
 script = ExtResource("1_m00sq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8d1b6")
 animation = &"walk"
 frame = 7
 frame_progress = 0.732557
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 7)
+position = Vector2(-1, 3)
 rotation = 1.57769
 shape = SubResource("CapsuleShape2D_uloym")
 
 [node name="kill_collider" type="Area2D" parent="."]
 
 [node name="kill_collider" type="CollisionShape2D" parent="kill_collider"]
-position = Vector2(-3, -8.75)
+position = Vector2(-0.5, -5.125)
 shape = SubResource("RectangleShape2D_45efl")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -131,6 +134,15 @@ volume_db = -3.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-2, 0)
-target_position = Vector2(-37, 20)
+target_position = Vector2(-18, 13)
+
+[node name="damage_collider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_collider"]
+position = Vector2(-1, 3)
+rotation = -1.58082
+shape = SubResource("CapsuleShape2D_m0bdi")
+debug_color = Color(0.743969, 0.236734, 0.972984, 0.42)
 
 [connection signal="area_entered" from="kill_collider" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="damage_collider" to="." method="_on_damage_collider_area_entered"]
