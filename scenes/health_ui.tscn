@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu04f1ftfuc58"]
+
+[ext_resource type="Texture2D" uid="uid://dbp3l71gfop2b" path="res://assets/pescadito.png" id="1_waxdi"]
+[ext_resource type="Script" path="res://scripts/health_ui.gd" id="1_wqlfu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up8a6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg2tk"]
+atlas = ExtResource("1_waxdi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmcud"]
+atlas = ExtResource("1_waxdi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47smx"]
+atlas = ExtResource("1_waxdi")
+
+[node name="health" type="PanelContainer"]
+offset_right = 1909.0
+offset_bottom = 1067.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_up8a6")
+script = ExtResource("1_wqlfu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="healt_1" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_fg2tk")
+stretch_mode = 2
+
+[node name="health_2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vmcud")
+stretch_mode = 2
+
+[node name="health_3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_47smx")
+stretch_mode = 2
+
+[node name="GameOverContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverContainer"]
+layout_mode = 2
+text = "Gay Bend Over"
