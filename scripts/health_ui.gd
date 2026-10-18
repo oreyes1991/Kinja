@@ -34,3 +34,7 @@ func _on_player_death():
 	health_3.hide()
 	game_over_label.show()
 	dark_background(1)
+	
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
